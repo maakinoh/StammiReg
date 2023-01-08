@@ -3,9 +3,9 @@ using Telegram.Bot.Types;
 
 namespace TelegramBot.StammiReg.Bot.Session.Handlers;
 
-public class AdminHandler : StateHandler
+public class AdminHandler : IStateHandler
 {
-    public StateHandler OnMessage(ITelegramBotClient client, Update update)
+    public IStateHandler OnMessage(ITelegramBotClient client, Message message)
     {
         throw new NotImplementedException();
     }

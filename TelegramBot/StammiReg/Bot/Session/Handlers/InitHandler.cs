@@ -3,11 +3,12 @@ using Telegram.Bot.Types;
 
 namespace TelegramBot.StammiReg.Bot.Session.Handlers;
 
-public class InitHandler : StateHandler
+public class InitHandler : IStateHandler
 {
-    public StateHandler OnMessage(ITelegramBotClient client, Update update)
+
+    public IStateHandler OnMessage(ITelegramBotClient client, Message message)
     {
-        if (update.Message.SenderChat?.Id.ToString() == Environment.GetEnvironmentVariable("STAMMIREG-ADMIN-TGID"))
+        if (message.SenderChat?.Id.ToString() == Environment.GetEnvironmentVariable("STAMMIREG-ADMIN-TGID"))
             return new AdminHandler();
         return this;
     }

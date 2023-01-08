@@ -23,12 +23,23 @@ public class Bot
 
     private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
-    {
+    {  
         if (update.Message is not { } message)
             return;
         // Only process text messages
         if (message.Text is not { } messageText)
             return;
+
+        switch (messageText)
+        {
+            case "/admin":
+                break;
+            case "/newMeet":
+                break;
+            case "/register":
+                break;
+            
+        }
     }
 
     private Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception,
