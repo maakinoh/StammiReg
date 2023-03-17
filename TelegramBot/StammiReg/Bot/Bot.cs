@@ -20,12 +20,33 @@ public class Bot
         );
     }
 
+    private async Task OnCallback(ITelegramBotClient client, CallbackQuery callbackQuery)
+    {
+    }
+
 
     private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
-    {  
+    {
         if (update.Message is not { } message)
+        {
+            // Check if the update also has no CallbackQuery
+            if (update.CallbackQuery is not { } cq)
+            {
+                return;
+            }
+            else
+            {
+                await OnCallback(botClient, cq);
+                return;
+            }
+        }
+
+        // Ensure that a user sent this message.
+        // The bot should not be used in channels.
+        if (message.From is not { } from)
             return;
+
         // Only process text messages
         if (message.Text is not { } messageText)
             return;
@@ -33,12 +54,12 @@ public class Bot
         switch (messageText)
         {
             case "/admin":
+                
                 break;
             case "/newMeet":
                 break;
             case "/register":
                 break;
-            
         }
     }
 
